@@ -3,11 +3,11 @@ import './InstaInput.scss';
 
 const instaInput = props => {
     const {onInput, placeholder, ...other} = props;
-    const onInputHandler = useCallback(e => {
+    const onInputHandler = e => {
         let val = e.target.value;
         e.target.classList[val ? 'add' : 'remove']('__not-empty');
         if (onInput) onInput(val);
-    }, [onInput]);
+    };
 
     return (
         <label className="InstaInput">

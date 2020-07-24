@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
-import './IndexPage.scss';
-import InstaForm from './InstaForm/InstaForm';
+// import './IndexPage.scss';
+import SearchForm from './SearchForm/SearchForm';
 
 
 const IndexPage = props => {
     return (
         <>
-            <h1>Map</h1>
+            <h1>IndexPage</h1>
             <div style={{width: '380px', margin: '0 auto' }}>
-                <InstaForm />
+                <SearchForm />
             </div>
 
         </>
