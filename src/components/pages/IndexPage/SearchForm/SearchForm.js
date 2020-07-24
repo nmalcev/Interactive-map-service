@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {findPlace} from '../../../../store/actions/mainActions';
 
 const placeholderText = 'Place';
 const INPUT_NAME = 'query';
@@ -14,20 +15,22 @@ const searchForm = props => {
         console.dir(props.history);
         console.dir(props);
 
-        props.onSearch(inputedValue.trim(), props.history);
+        props.onSearch(inputedValue.trim()/*, props.history*/);
     };
 
     return (
         <form className="SearchForm" onSubmit={onSubmitHandler}>
-            <input type="text" name={INPUT_NAME} placeholder={placeholderText}/>
-            <button type="submit">Submit</button>
+            <input type="text" name={INPUT_NAME} placeholder={placeholderText} disabled={props.isLoading}/>
+            <button type="submit" disabled={props.isLoading}>Submit</button>
         </form>
     );
 }
 
 export default connect(
-    null,
+    state => ({
+        isLoading: state.mainState.isLoading
+    }),
     dispatch => ({
-        onSearch: (query, history) => dispatch(findPlace(query, history))
+        onSearch: (query/*, history*/) => dispatch(findPlace(query/*, history*/))
     })
 )(withRouter(searchForm));

@@ -22,16 +22,18 @@ class DataPage extends Component {
 }
 
 export default connect(
-    null,
-    null
-    // state => {
-    //     const profileId = state.processingState.profileId;
-    //     const activeProfile = state.profiles[profileId];
+    state => {
+        const featureId = state.mainState.featureId;
+        const activeFeature = '';
+
+        console.log('STATE');
+        console.dir(state);
         
-    //     return ({
-    //         activeProfile,
-    //     });
-    // },
+        return ({
+            activeFeature,
+        });
+    },
+    null
     // dispatch => ({
     //     getFollowingList: igUserId => dispatch(getFollowingListThunk(igUserId)),
     // })

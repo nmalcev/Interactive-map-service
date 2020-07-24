@@ -2,16 +2,20 @@ import {
     PLACEDATA_LOADING_STARTED,
     PLACEDATA_LOADED,
     PLACEDATA_CANT_BE_DOWNLOADED,
-    PLACEDATA_LOADING_COMPLETED
+    PLACEDATA_LOADING_COMPLETED,
+    NAVIGATE_TO_FEATUTE
 } from './mainActionTypes';
+import downloadPlaceData from '../downloaders/downloadPlaceData';
+import {MAP_ROUTE} from '../../components/routes/routes';
+
 
 export const startLoadingPlaceData = query => ({
     type: PLACEDATA_LOADING_STARTED,
     query
 });
-export const placeDataLoaded = profileId => ({
+export const placeDataLoaded = features => ({
     type: PLACEDATA_LOADED,
-    profileId
+    payload: features
 });
 export const loadFailed = () => ({
     type: PLACEDATA_CANT_BE_DOWNLOADED
@@ -21,26 +25,26 @@ export const loadCompleted = () => ({
 });
 
 
-export const findPlace = (query, history) => {
+export const findPlace = (query) => {
     return (dispatch, getState) => {
         dispatch(startLoadingPlaceData(query));
         downloadPlaceData(query).
-            then(profileData => {
-
-                // dispatch(userProfileLoaded(profileData.id));
-                // TODO dispatch to the collection
-                console.log('STATE');
-                console.dir(getState());
-                // dispatch(updateProfile(profileData));
-
-                // navigate on the next page
-                history.push(USER_ROUTE);
+            then(features => {
+                dispatch(placeDataLoaded(features));
             }).catch(requestError => {
-                console.warn('requestError');
-                console.dir(requestError);
-                dispatch(loadFailed());
+                dispatch(loadFailed(requestError));
             }).finally(() => {
                 dispatch(loadCompleted());
             });
+    };
+};
+
+export const navigateToPlace = (featureId, history) => {
+    return dispatch => {
+        dispatch({
+            type: NAVIGATE_TO_FEATUTE,
+            payload: featureId 
+        });
+        history.push(MAP_ROUTE);
     };
 };
