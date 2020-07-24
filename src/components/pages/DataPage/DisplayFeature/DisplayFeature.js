@@ -8,10 +8,11 @@ class DisplayFeature extends Component {
     }
 
     componentDidMount() {
-        const OL = ol; // eslint-disable-line no-use-before-define
-        const coordinates = this.props.feature.geography?.coordinates || [];
+        const OL = ol; // eslint-disable-line no-undef
+        const coordinates = this.props.feature.geometry?.coordinates || [];
+
         let map = new OL.Map({
-            target: this.mapRef,
+            target: this.mapRef.current,
             layers: [
               new OL.layer.Tile({
                 source: new OL.source.OSM()
@@ -35,3 +36,5 @@ class DisplayFeature extends Component {
         )
     }
 }
+
+export default DisplayFeature;

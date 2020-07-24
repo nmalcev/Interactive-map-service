@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {DisplayFeature} from './DisplayFeature/DisplayFeature';
+import DisplayFeature from './DisplayFeature/DisplayFeature';
 
 class DataPage extends Component {
 	render() {
