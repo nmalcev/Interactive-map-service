@@ -1,0 +1,11 @@
+.InstaForm {
+    display: flex;
+    flex-direction: row;
+    &__input {
+        flex: 1 1 auto;
+    }
+    &__button {
+        flex: 0 0 42px;
+        margin: 0 0 0 12px;
+    }
+}
