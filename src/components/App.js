@@ -4,15 +4,14 @@ import {connect} from 'react-redux';
 
 import IndexPage from './pages/IndexPage/IndexPage';
 import DataPage from './pages/DataPage/DataPage';
-
-const DATA_ROUTE = '/map';
+import {MAP_ROUTE} from './routes/routes';
 
 class App extends Component {
     render() {
         return (
             <Switch>
                 <Route path="/" component={IndexPage} exact />
-                <Route path={DATA_ROUTE} component={DataPage} exact />
+                <Route path={MAP_ROUTE} component={DataPage} exact />
                 {/* {
                     this.props.profileId ?
                         <Route path={USER_ROUTE} component={UserPage} exact />

@@ -1,38 +1,37 @@
-import * as actions from './mainActionTypes';
-import downloadProfile from '../downloaders/downloadProfile';
-import {updateProfile} from './profileCollection';
+import {
+    PLACEDATA_LOADING_STARTED,
+    PLACEDATA_LOADED,
+    PLACEDATA_CANT_BE_DOWNLOADED,
+    PLACEDATA_LOADING_COMPLETED
+} from './mainActionTypes';
 
-// import 
-
-export const startLoadingUserProfile = userName => ({
-    type: actions.PROFILE_LOADING_STARTED,
-    requestedUserName: userName
+export const startLoadingPlaceData = query => ({
+    type: PLACEDATA_LOADING_STARTED,
+    query
 });
-export const userProfileLoaded = profileId => ({
-    type: actions.PROFILE_LOADED,
+export const placeDataLoaded = profileId => ({
+    type: PLACEDATA_LOADED,
     profileId
 });
 export const loadFailed = () => ({
-    type: actions.PROFILE_CANT_BE_DOWNLOADED
+    type: PLACEDATA_CANT_BE_DOWNLOADED
 });
 export const loadCompleted = () => ({
-    type: actions.PROFILE_LOADING_COMPLETED
-})
+    type: PLACEDATA_LOADING_COMPLETED
+});
 
-const USER_ROUTE = '/user';
 
-// TODO use moxios to create mock and test
-export const processUserProfile = (username, history) => {
+export const findPlace = (query, history) => {
     return (dispatch, getState) => {
-        dispatch(startLoadingUserProfile(username));
-        downloadProfile(username).
+        dispatch(startLoadingPlaceData(query));
+        downloadPlaceData(query).
             then(profileData => {
 
-                dispatch(userProfileLoaded(profileData.id));
+                // dispatch(userProfileLoaded(profileData.id));
                 // TODO dispatch to the collection
                 console.log('STATE');
                 console.dir(getState());
-                dispatch(updateProfile(profileData));
+                // dispatch(updateProfile(profileData));
 
                 // navigate on the next page
                 history.push(USER_ROUTE);

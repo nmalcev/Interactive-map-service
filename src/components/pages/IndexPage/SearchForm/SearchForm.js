@@ -1,37 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-// import './InstaForm.scss';
 
-// import InstaInput from '../../../UI/InstaInput/InstaInput';
-// import InstaButton from '../../../UI/InstaButton/InstaButton';
-// import {processUserProfile} from '../../../../store/actions/processing';
-// import { extractUserId } from '../../../../utils/parsers';
-
-const placeholderText = 'Username or page link';
+const placeholderText = 'Place';
+const INPUT_NAME = 'query';
 
 const searchForm = props => {
     const onSubmitHandler = e => {
         e.preventDefault();
-        // const inputedValue = e.target.elements.iguser.value;
+        const inputedValue = e.target.elements[INPUT_NAME].value;
 
         console.log('SearchForm');
         console.dir(props.history);
         console.dir(props);
-        // props.onIgUser(extractUserId(inputedValue), props.history);
+
+        props.onSearch(inputedValue.trim(), props.history);
     };
 
     return (
         <form className="SearchForm" onSubmit={onSubmitHandler}>
-            <p>TODO</p>
+            <input type="text" name={INPUT_NAME} placeholder={placeholderText}/>
+            <button type="submit">Submit</button>
         </form>
     );
 }
 
 export default connect(
     null,
-    null
-    // dispatch => ({
-    //     onIgUser: (userName, history) => dispatch(processUserProfile(userName, history))
-    // })
+    dispatch => ({
+        onSearch: (query, history) => dispatch(findPlace(query, history))
+    })
 )(withRouter(searchForm));
