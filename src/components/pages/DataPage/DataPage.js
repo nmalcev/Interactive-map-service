@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-// import { getFollowingListThunk } from '../../../store/actions/profileCollection';
+import {DisplayFeature} from './DisplayFeature/DisplayFeature';
 
 class DataPage extends Component {
 	render() {
         return (
             <>
                 <h1>DataPage</h1>
-
-                {/* <UserBadge 
-                    avatar={this.props.activeProfile.profile_pic_url} 
-                    name={this.props.activeProfile.username} 
-                    biography={this.props.activeProfile.biography}/>
-                <FollowerList 
-                    profile={this.props.activeProfile} 
-                    getFollowingList={this.props.getFollowingList}>
-                </FollowerList> */}
+                <DisplayFeature feature={this.props.activeFeature}/>
             </>
         );
 	}
@@ -24,7 +16,7 @@ class DataPage extends Component {
 export default connect(
     state => {
         const featureId = state.mainState.featureId;
-        const activeFeature = '';
+        const activeFeature = state.mainState.features.find(feature => feature.id === featureId);
 
         console.log('STATE');
         console.dir(state);
