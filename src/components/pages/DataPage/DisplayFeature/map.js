@@ -1,4 +1,12 @@
-const OL = window.ol; // eslint-disable-line no-undef
+import {Map, View, Feature, Overlay} from 'ol/index';
+import {Point} from 'ol/geom';
+import {fromLonLat} from 'ol/proj';
+import {Vector as VectorLayer, Tile as TileLayer} from 'ol/layer';
+import {OSM, Vector as VectorSource} from 'ol/source';
+import {Style, Circle, Fill, Stroke} from 'ol/style';
+import 'ol/ol.css';
+
+
 // https://openlayers.org/en/latest/doc/tutorials/bundle.html
 // https://openlayers.org/en/latest/examples/geographic.html
 
@@ -12,36 +20,36 @@ export default class {
     }
 
     render() {
-        let point = new OL.geom.Point(OL.proj.fromLonLat(this.coordinates));
-        let map = new OL.Map({
+        let point = new Point(fromLonLat(this.coordinates));
+        let map = new Map({
             target: this.mapNode,
             layers: [
-              new OL.layer.Tile({
-                source: new OL.source.OSM()
+              new TileLayer({
+                source: new OSM()
               }),
             ],
-            view: new OL.View({
-              center: OL.proj.fromLonLat(this.coordinates),
+            view: new View({
+              center: fromLonLat(this.coordinates),
               zoom: 17
             })
         });
 
-        let layer = new OL.layer.Vector({
-            source: new OL.source.Vector({
+        let layer = new VectorLayer({
+            source: new VectorSource({
                 features: [
-                    new OL.Feature({
+                    new Feature({
                         geometry: point
                     })
                 ]
             }),
-            style: new OL.style.Style({
-                image: new OL.style.Circle({
+            style: new Style({
+                image: new Circle({
                     radius: 12,
-                    stroke: new OL.style.Stroke({
+                    stroke: new Stroke({
                         color: 'blue',
                         width: 1
                     }),
-                    fill: new OL.style.Fill({
+                    fill: new Fill({
                         color: 'rgba(0, 0, 255, 0.1)'
                     }),
                 }),
@@ -50,7 +58,7 @@ export default class {
         map.addLayer(layer);
         const element = document.createElement('div');
 
-        let popup = new OL.Overlay({
+        let popup = new Overlay({
             element: element,
             positioning: 'bottom-center',
             stopEvent: false,
@@ -61,11 +69,11 @@ export default class {
         map.on('click', (event) => {
             let feature = map.getFeaturesAtPixel(event.pixel)[0];
             if (feature) {
-              let coordinate = feature.getGeometry().getCoordinates();
-              console.log('Coordinate');
-              console.dir(coordinate);
-              element.innerHTML = `<span style="background:#fff;padding:5px;">${this.placeName}</span>`;
-              popup.setPosition(coordinate);
+                let coordinate = feature.getGeometry().getCoordinates();
+                console.log('Coordinate');
+                console.dir(coordinate);
+                element.innerHTML = `<span style="background:#fff;padding:5px;">${this.placeName}</span>`;
+                popup.setPosition(coordinate);
             } else {
                 popup.setPosition(undefined);
                 element.blur();
@@ -74,14 +82,13 @@ export default class {
           
         map.on('pointermove', function(event) {
             if (map.hasFeatureAtPixel(event.pixel)) {
-              map.getViewport().style.cursor = 'pointer';
+                map.getViewport().style.cursor = 'pointer';
             } else {
-              map.getViewport().style.cursor = 'inherit';
+                map.getViewport().style.cursor = 'inherit';
             }
         });
         console.log('MAP');
         console.dir(map);
-        console.dir(OL);
         this.map = map;
     }
 
