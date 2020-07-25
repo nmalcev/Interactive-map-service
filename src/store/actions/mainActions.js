@@ -28,8 +28,8 @@ export const loadCompleted = () => ({
 export const findPlace = (query) => {
     return (dispatch, getState) => {
         dispatch(startLoadingPlaceData(query));
-        downloadPlaceData(query).
-            then(features => {
+        downloadPlaceData(query)
+            .then(features => {
                 dispatch(placeDataLoaded(features));
             }).catch(requestError => {
                 dispatch(loadFailed(requestError));

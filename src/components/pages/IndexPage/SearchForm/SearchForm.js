@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {findPlace} from '../../../../store/actions/mainActions';
 
-const placeholderText = 'Place';
+const placeholderText = 'Enter a place name';
 const INPUT_NAME = 'query';
 
 const searchForm = props => {
@@ -15,7 +15,7 @@ const searchForm = props => {
         console.dir(props.history);
         console.dir(props);
 
-        props.onSearch(inputedValue.trim()/*, props.history*/);
+        props.onSearch(inputedValue.trim());
     };
 
     return (
@@ -31,6 +31,6 @@ export default connect(
         isLoading: state.mainState.isLoading
     }),
     dispatch => ({
-        onSearch: (query/*, history*/) => dispatch(findPlace(query/*, history*/))
+        onSearch: (query) => dispatch(findPlace(query))
     })
 )(withRouter(searchForm));

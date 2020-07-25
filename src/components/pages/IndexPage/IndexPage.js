@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import SearchForm from './SearchForm/SearchForm';
 import FeatureItem from './FeatureItem/FeatureItem';
@@ -12,6 +12,9 @@ const IndexPage = props => {
             <div style={{width: '380px', margin: '0 auto' }}>
                 <SearchForm />
             </div>
+            {props.isLoading && (
+                <p>Looking for suitable options</p>
+            )}
             <ol>
                 {props.features.map(feature => {
                     return (<li key={feature.id} onClick={() => props.onNavigate(feature.id, props.history)}>
@@ -19,7 +22,6 @@ const IndexPage = props => {
                     </li>);
                 })}
             </ol>
-
         </>
     );
 };
@@ -28,6 +30,7 @@ export default connect(
     state => {
         return {
             features: state.mainState.features,
+            isLoading: state.mainState.isLoading
         };
     },
     dispatch => ({
