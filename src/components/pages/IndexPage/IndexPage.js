@@ -21,7 +21,6 @@ const IndexPage = props => {
                     <p className="text-secondary">Looking for suitable options</p>
                 </div>
             )}
-
             {props.features.length > 0 && (
                 <>
                     <p>Results for "{props.lastQuery}":</p>

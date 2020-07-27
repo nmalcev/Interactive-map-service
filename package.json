@@ -17,6 +17,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "export": "rm -f project.last.zip && zip -r project.last.zip . -x \"*node_modules/*\" -x *.git/*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

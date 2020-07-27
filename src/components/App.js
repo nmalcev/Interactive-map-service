@@ -3,9 +3,8 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import IndexPage from './pages/IndexPage/IndexPage';
-import DataPage from './pages/DataPage/DataPage';
 import {MAP_ROUTE} from './routes/routes';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import loadComponent from './hoc/LoadComponent/LoadComponent';
 
 class App extends Component {
     render() {
@@ -14,7 +13,10 @@ class App extends Component {
                 <Route path="/" component={IndexPage} exact />
                 {
                     this.props.featureId ?
-                        <Route path={MAP_ROUTE} component={DataPage} exact />
+                        <Route path={MAP_ROUTE} render={loadComponent(
+                            () => import('./pages/FeaturePage/FeaturePage'),
+                            <h3>Loading...</h3>
+                        )} exact />
                         : <Redirect from={MAP_ROUTE} to="/"/>
                 }
                 <Route component={() => <div>Not found</div>} />
