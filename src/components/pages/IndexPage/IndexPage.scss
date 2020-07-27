@@ -1,25 +1,15 @@
-@mixin text($fontSize, $lineHeight, $color:false) {
-    font-size: $fontSize * 1px;
-    line-height: $lineHeight * 1px;
-    
-    @if($color){
-    	color: $color;
-    }
-}
-@mixin inlineMiddle(){
-	display: inline-block;
-	vertical-align: middle;
-}
+@import './mixins';
 
 .IndexPage{
     &__logo {
-
+        text-align: center;
     }
     &__title {
-        @include text(21, 24);
+        @include text(18, 21);
+        margin: 0;
     }
     &__sub-title {
-        @include text(13, 15);
+        @include text(11, 13);
     }
 
     &-spinner {
@@ -30,5 +20,9 @@
             margin: 0 0 0 1rem;
             @include text(13, 13);
         }
+    }
+    &__container {
+        @include inlineMiddle();
+        text-align: left;
     }
 }

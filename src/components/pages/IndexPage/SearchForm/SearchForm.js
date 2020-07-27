@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {findPlace} from '../../../../store/actions/mainActions';
+import './SearchForm.scss';
 
 const placeholderText = 'ex: musée d’orsay';
 const INPUT_NAME = 'query';

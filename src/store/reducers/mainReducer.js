@@ -9,7 +9,8 @@ import {
 const initialState = {
     isLoading: false,
     featureId: null,
-    features: []
+    features: [],
+    lastQuery: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const reducer = (state = initialState, action) => {
         case PLACEDATA_LOADING_STARTED:
             nextState = {
                 ...state,
+                lastQuery: action.query,
                 isLoading: true,
                 featureId: null,
                 features: [] 
