@@ -3,17 +3,23 @@ import {connect} from 'react-redux';
 import SearchForm from './SearchForm/SearchForm';
 import FeatureItem from './FeatureItem/FeatureItem';
 import {navigateToPlace} from './../../../store/actions/mainActions';
-
+import './IndexPage.scss';
 
 const IndexPage = props => {
     return (
-        <>
-            <h1>IndexPage</h1>
-            <div style={{width: '380px', margin: '0 auto' }}>
+        <div className="container">
+            <section className="IndexPage__logo">
+                <h1 className="IndexPage__title">Any place you want</h1>
+                <p className="IndexPage__sub-title text-secondary">Enter any place and the service will find its location</p>
+            </section>
+            <div className="mb-5">
                 <SearchForm />
             </div>
             {props.isLoading && (
-                <p>Looking for suitable options</p>
+                <div className="IndexPage-spinner">
+                    <div className="spinner-border text-primary"></div>
+                    <p className="text-secondary">Looking for suitable options</p>
+                </div>
             )}
             <ol>
                 {props.features.map(feature => {
@@ -22,7 +28,7 @@ const IndexPage = props => {
                     </li>);
                 })}
             </ol>
-        </>
+        </div>
     );
 };
 

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import IndexPage from './pages/IndexPage/IndexPage';
 import DataPage from './pages/DataPage/DataPage';
 import {MAP_ROUTE} from './routes/routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
     render() {
