@@ -5,7 +5,8 @@ The app uses the OpenStreetMap database provided by the online service https://p
 
 I developed this app on top of the template provided by the Create React App package. I used Redux for state management and Redux-thunk for handling asynchronous interactions with the store.
 I also used the Axios library to request the web service, the React Router library to support html5 routing, SCSS for styles preprocessing, and Bootstrap for CSS styling, and OpenLayers for displaying map data. I hope you enjoy the app.
-[Link to the deployed application](https://nm-demo.herokuapp.com/)
+
+[Link to the deployed application.](https://nm-demo.herokuapp.com/)
 
 
 ## Commands
@@ -23,7 +24,7 @@ npm run start
 After launching the application in a command shell, the user can interact with the application's user interface.  
 The user must open the page `http://localhost:3000/` in a browser and enter any location/place name (e.g. musée d’orsay).
 
-### Tested on
+The app has been tested in the following environments:
 
 |Os |`$ node -v`|`$ npm -v` |
 |:--|:--|:--|
